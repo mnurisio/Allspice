@@ -5,6 +5,14 @@ import { AppState } from "@/AppState.js"
 
 
 class RecipeService {
+    setActiveRecipe(recipe) {
+        AppState.activeRecipe = recipe
+    }
+   
+   async getRecipeById(recipeId) {
+        const response = await api.get(`api/recipes/${recipeId}`)
+        logger.log("getting recipe by ID", response.data)
+    }
 
     async getAllRecipes() {
         const response = await api.get('api/recipes')

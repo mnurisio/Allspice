@@ -2,6 +2,7 @@
 import Navbar from './components/Navbar.vue';
 import { AppState } from './AppState.js';
 import RecipeModal from './components/RecipeModal.vue';
+import { Recipe } from './models/Recipe';
 
 </script>
 

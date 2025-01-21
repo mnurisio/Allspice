@@ -5,12 +5,10 @@ import { recipeService } from '@/services/RecipeService';
 import { logger } from '@/utils/Logger';
 import Pop from '@/utils/Pop';
 import { computed, onMounted, watch } from 'vue';
-import { useRoute } from 'vue-router';
 
 
 const recipes = computed(() => AppState.recipe)
 
-const route = useRoute()
 
 onMounted(() => {
   getAllRecipes()

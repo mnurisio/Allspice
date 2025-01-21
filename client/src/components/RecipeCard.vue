@@ -1,14 +1,27 @@
 <script setup>
 import { Recipe } from '@/models/Recipe';
+import { ingredientService } from '@/services/IngredientsService';
+import { recipeService } from '@/services/RecipeService';
 
-defineProps({
+
+
+const props = defineProps({
     recipe: {type: Recipe, required: true}
 }) 
+
+
+async function setActiveRecipe(){
+    recipeService.setActiveRecipe(props.recipe)
+    await ingredientService.getIngredientsByRecipeId(props.recipe.id)
+}
+
+
+
 </script>
 
 
 <template>
-    <div role="button" data-bs-toggle="modal" data-bs-target="#recipeModal">
+    <div @click="setActiveRecipe()" role="button" data-bs-toggle="modal" data-bs-target="#recipeModal">
         <div class="recipeCard card my-4" :style="{backgroundImage: `url(${recipe.img})`}">
             <div class="card-body text-light align-items-between">
                 <div class=" row justify-content-between">
