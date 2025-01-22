@@ -68,7 +68,6 @@ async function getAllRecipes() {
   </div>
   <ModalWrapper modalId="createRecipeModal" modalTitle="Create Fire Recipe">
     <CreateRecipeForm />
-    <h1>WHAT</h1>
   </ModalWrapper>
 </template>
 

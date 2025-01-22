@@ -6,6 +6,13 @@ import { Ingredient } from "@/models/Ingredient.js"
 
 
 class IngredientService{
+
+   async createIngredient(ingredientData) {
+        const response = await api.post('api/ingredients', ingredientData)
+        logger.log('creating ingredient', response.data)
+        const ingredient = new Ingredient(response.data)
+        AppState.ingredients.push(ingredient)
+    }
     async getIngredientsByRecipeId(recipeId) {
         const response = await api.get(`api/recipes/${recipeId}/ingredients`)
         logger.log("got ingredients", response.data)

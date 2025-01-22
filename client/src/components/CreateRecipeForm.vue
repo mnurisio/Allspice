@@ -25,6 +25,8 @@ async function createRecipe() {
             category: '',
             img: ''
         }
+
+        Modal.getInstance('#createRecipeModal').hide()
         Modal.getInstance('#recipeModal').show()
     }
     catch (error) {
