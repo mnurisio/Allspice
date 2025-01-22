@@ -9,10 +9,11 @@ import { favoritesService } from '@/services/FavoritesService';
 
 
 
-
+const favorites = computed(() => AppState.favorites)
 const recipe = computed(() => AppState.activeRecipe)
 const ingredients = computed(() => AppState.ingredients)
 const account = computed(() => AppState.account)
+const isFavorited = computed(() => favorites.value.some(favorites => favorites.accountId == account?.value.id))
 
 const editMode = ref(false)
 
@@ -70,16 +71,25 @@ async function deleteRecipe() {
     }
 }
 
-async function deleteIngredient(ingredientId){
+async function deleteIngredient(ingredientId) {
     try {
         const confirm = await Pop.confirm("are you sure you want to delete this ingredient?")
         if (!confirm) return
         await ingredientService.deleteIngredient(ingredientId)
     }
-    catch (error){
-    Pop.error(error);
+    catch (error) {
+        Pop.error(error);
     }
 }
+
+// async function deleteFavorite(){
+//     try {
+    
+//     }
+//     catch (error){
+//     Pop.error(error);
+//     }
+// }
 
 
 </script>
@@ -100,37 +110,53 @@ async function deleteIngredient(ingredientId){
                             </span>
                         </div>
                         <div class="fs-3 text-success">
-                                <p class="m-0">{{ recipe.title }}</p>
-                                <div v-if="recipe.creatorId == account?.id" class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <p class="m-0">{{ recipe.title }}</p>
+                        </div>
+                        <div class="row justify-content-between">
+                            <div v-if="recipe.creatorId == account?.id" class="dropdown col-4 align-self-center">
+                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
                                     Options
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><button @click="editMode = true" :hidden="editMode == true" class="btn btn-primary rounded rounded-pill ms-2">Edit</button></li>
-                                        <li><button @click="editMode = false" :hidden="editMode == false" class="btn btn-primary rounded rounded-pill ms-2">Cancel</button></li>
-                                        <li><button @click="deleteRecipe()" class="btn btn-danger ms-2 rounded rounded-pill">Delete</button></li>
-                                    </ul>
-                                </div>      
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><button @click="editMode = true" :hidden="editMode == true"
+                                            class="btn btn-primary rounded rounded-pill ms-2">Edit</button></li>
+                                    <li><button @click="editMode = false" :hidden="editMode == false"
+                                            class="btn btn-primary rounded rounded-pill ms-2">Cancel</button></li>
+                                    <li><button @click="deleteRecipe()"
+                                            class="btn btn-danger ms-2 rounded rounded-pill">Delete</button></li>
+                                </ul>
+                            </div>
+                            <div class="col-4">
+                                <span v-if="!isFavorited" @click="createFavorite()" role="button">
+                                    <i class="mdi mdi-heart-outline"></i>
+                                </span>
+                                <span v-if="isFavorited" role="button">
+                                    <i class="mdi mdi-heart"></i>
+                                </span>
+                            </div>
                         </div>
                         <div>
                             by: {{ recipe.creator.name }}
                         </div>
-                            <div class="row my-2">
-                                <div class="col-md-2 text-center">
-                                    <span @click="createFavorite()" role="button" class=" px-2 py-1 bg-secondary rounded rounded-pill">❣️</span>
-                                </div>
-                                <div class="col-md-2">
-                                    <span class="px-2 py-1 rounded rounded-pill bg-secondary text-light">
-                                        {{ recipe.category }}
-                                    </span>
-                                </div>
+                        <div class="row my-2">
+                            <div class="col-md-2 text-center">
+
                             </div>
+                            <div class="col-md-2">
+                                <span class="px-2 py-1 rounded rounded-pill bg-secondary text-light">
+                                    {{ recipe.category }}
+                                </span>
+                            </div>
+                        </div>
                         <div class="mb-4">
                             <h5>Ingredients</h5>
                         </div>
                         <div v-for="ingredient in ingredients" :key="ingredient.id">
                             <div class="mb-2">
-                                <span v-if="editMode == true" role="button" @click="deleteIngredient(ingredient.id)"><i class="mdi mdi-delete-outline"></i> {{ ingredient.quantity }} {{ ingredient.name }}</span>
+                                <span v-if="editMode == true" role="button" @click="deleteIngredient(ingredient.id)"><i
+                                        class="mdi mdi-delete-outline"></i> {{ ingredient.quantity }} {{ ingredient.name
+                                    }}</span>
                             </div>
                         </div>
                         <form class="me-3 mt-4 row" v-if="editMode == true" @submit.prevent="createIngredient()">
@@ -171,4 +197,5 @@ async function deleteIngredient(ingredientId){
 .categoryName {
     background-color: #ffffffa4;
 }
+
 </style>
