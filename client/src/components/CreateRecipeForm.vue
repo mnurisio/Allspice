@@ -1,4 +1,6 @@
 <script setup>
+import { Recipe } from '@/models/Recipe';
+import { ingredientService } from '@/services/IngredientsService';
 import { recipeService } from '@/services/RecipeService';
 import Pop from '@/utils/Pop';
 import { Modal } from 'bootstrap';
@@ -13,6 +15,8 @@ const editableRecipeData = ref({
 })
 
 
+
+
 async function createRecipe() {
     try {
         const recipe = await recipeService.createRecipe(editableRecipeData.value)
@@ -23,7 +27,9 @@ async function createRecipe() {
             img: ''
         }
 
-        Modal.getInstance('#createRecipeModal').hide()
+        recipeService.setActiveRecipe(recipe)
+
+        // Modal.getInstance('#createRecipeModal').hide()
 
     }
     catch (error) {
