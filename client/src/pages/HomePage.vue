@@ -9,6 +9,8 @@ import { computed, onMounted, watch } from 'vue';
 
 const recipes = computed(() => AppState.recipe)
 
+const account = computed(() => AppState.account)
+
 
 onMounted(() => {
   getAllRecipes()
@@ -16,11 +18,11 @@ onMounted(() => {
 
 
 
-async function getAllRecipes(){
+async function getAllRecipes() {
   try {
     await recipeService.getAllRecipes()
   }
-  catch (error){
+  catch (error) {
     logger.error(error);
   }
 
@@ -29,18 +31,33 @@ async function getAllRecipes(){
 
 <template>
   <!-- //NOTE "Top of page" -->
-  <div class="container-fluid ">
-    <div class="row bg-hero justify-content-center">
-      <div class="col-3 text-light text-center">
-        <h1>All-Spice</h1>
-        <h6>Cherish Your Family</h6>
-        <h6>And Their Cooking</h6>
+  <div class="container-fluid">
+    <div class="row bg-hero justify-content-center p-md-5">
+      <div class="col-12 text-light text-center p-md-5 sahitya-regular titleSlogan">
+        <p class="fs-1 m-2 titleSlogan">All-Spice</p>
+        <p class="fs-4 m-1 titleSlogan">Cherish Your Family</p>
+        <p class="fs-4 m-1 titleSlogan">And Their Cooking</p>
+      </div>
+      <div class="row justify-content-center mainMenu">
+        <div class="col-md-5 card">
+          <div v-if="account" class="row text-center text-success p-3 sahitya-regular fs-3 Shadow">
+            <div class="col-md-3"><span class="homeLinks" role="button">Home</span></div>
+            <div class="col-md-3"><span class="homeLinks" role="button">My Recipes</span></div>
+            <div class="col-md-3"><span class="homeLinks" role="button">Favorites</span></div>
+            <div class="col-md-3"><span class="homeLinks" role="button">Create Recipe</span></div>
+          </div>
+          <div v-else class="row text-center text-success p-3 sahitya-regular fs-3 Shadow">
+            <div class="col-md-4"><span class="homeLinks" role="button">Home</span></div>
+            <div class="col-md-4"><span class="homeLinks" role="button">My Recipes</span></div>
+            <div class="col-md-4"><span class="homeLinks" role="button">Favorites</span></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="container-fluid">
+  <div class="container-fluid mt-md-5">
     <div class="row">
-      <div v-for="recipe in recipes" :key="recipe.id" class="col-4">
+      <div v-for="recipe in recipes" :key="recipe.id" class="col-md-4">
         <RecipeCard :recipe="recipe" />
       </div>
     </div>
@@ -48,12 +65,29 @@ async function getAllRecipes(){
 </template>
 
 <style scoped lang="scss">
-
-
-.bg-hero{
-  background-image: url('https://images.unsplash.com/photo-1497534547324-0ebb3f052e88?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cnVzdGljJTIwZm9vZHxlbnwwfHwwfHx8Mg%3D%3D');
+.bg-hero {
+  background-image: url('https://images.unsplash.com/photo-1515823808611-65fd8e56c71a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDR8fHJ1c3RpYyUyMGZvb2R8ZW58MHx8MHx8fDI%3D');
   background-size: cover;
   background-position: center;
+  margin: 1% 0.5%;
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+}
 
+.mainMenu {
+  position: relative;
+  top: 80px;
+}
+
+.titleSlogan {
+  text-shadow: 1px 1px black;
+  backdrop-filter: grayscale(80%);
+}
+
+.homeLinks:hover {
+  text-decoration: underline;
+}
+
+.Shadow{
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
 }
 </style>

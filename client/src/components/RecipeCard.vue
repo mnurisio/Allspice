@@ -22,17 +22,17 @@ async function setActiveRecipe(){
 
 <template>
     <div @click="setActiveRecipe()" role="button" data-bs-toggle="modal" data-bs-target="#recipeModal">
-        <div class="recipeCard card my-4" :style="{backgroundImage: `url(${recipe.img})`}">
+        <div class="recipeCard card my-md-4" :style="{backgroundImage: `url(${recipe.img})`}">
             <div class="card-body text-light align-items-between">
                 <div class=" row justify-content-between">
-                    <div class="col-4">
-                        <span class="bg-secondary py-1 px-2 rounded rounded-pill">{{ recipe.category }}</span>
+                    <div class="col-md-4">
+                        <span class="bg-secondary py-md-1 px-md-2 rounded rounded-pill">{{ recipe.category }}</span>
                     </div>
-                    <div class="col-2">
-                        <span class="bg-secondary py-1 px-2 rounded rounded-pill">❣️</span>
+                    <div class="col-md-2">
+                        <span class="bg-secondary py-md-1 px-md-2 rounded rounded-pill">❣️</span>
                     </div>
                 </div>
-                <div class="row px-2 pt-2">
+                <div class="row px-md-2 pt-md-2">
                     <div class="bg-secondary">
                         {{ recipe.title }}
                     </div>
@@ -48,5 +48,6 @@ async function setActiveRecipe(){
     background-size: cover;
     background-position: center;
     min-height: 20dvh;
+    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
 }
 </style>

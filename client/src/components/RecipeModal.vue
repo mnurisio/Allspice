@@ -19,7 +19,7 @@ const ingredients = computed(()=> AppState.ingredients)
         <div class="modal-dialog modal-lg">
             <div v-if="recipe" class="modal-content">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-md-6">
                             <img class="img-fluid w-100 h-100" :src="recipe.img" :alt="recipe.title">
                         </div>
                         <div class="col-6">
@@ -33,8 +33,8 @@ const ingredients = computed(()=> AppState.ingredients)
                             </div>
                             <div>
                                 by: {{ recipe.creator.name }}
-                                <div class="my-2">
-                                    <span class="rounded rounded-pill bg-secondary text-light py-1 px-2">{{ recipe.category }}</span>
+                                <div class="my-md-2">
+                                    <span class="rounded rounded-pill bg-secondary text-light py-md-1 px-md-2">{{ recipe.category }}</span>
                                 </div>
                             </div>
                             <div>

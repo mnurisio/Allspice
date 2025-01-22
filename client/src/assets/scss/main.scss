@@ -1,6 +1,7 @@
 @import "./_variables.scss";
 @import "./_utilities.scss";
 @import "./loaders.scss";
+@import url('https://fonts.googleapis.com/css2?family=Sahitya:wght@400;700&display=swap');
 
 body {
   overscroll-behavior: none;
@@ -20,4 +21,17 @@ main {
 a {
   text-decoration: none;
 }
+
+.sahitya-regular {
+  font-family: "Sahitya", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.sahitya-bold {
+  font-family: "Sahitya", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
 
