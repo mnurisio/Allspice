@@ -17,6 +17,7 @@ class RecipeService {
         logger.log('Created Recipe', response.data)
         const recipe = new Recipe(response.data)
         AppState.recipe.push(recipe)
+        AppState.activeRecipe = recipe
     }
     setActiveRecipe(recipe) {
         AppState.activeRecipe = recipe

@@ -87,6 +87,7 @@ async function getAllRecipes() {
 .titleSlogan {
   text-shadow: 1px 1px black;
   backdrop-filter: grayscale(80%);
+  user-select: none;
 }
 
 .homeLinks:hover {

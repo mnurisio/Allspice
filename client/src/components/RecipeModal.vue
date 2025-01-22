@@ -11,6 +11,7 @@ import { useRoute } from 'vue-router';
 
 const recipe = computed(() => AppState.activeRecipe)
 const ingredients = computed(() => AppState.ingredients)
+const account = computed(()=> AppState.account)
 
 
 async function deleteRecipe() {
@@ -49,7 +50,7 @@ async function deleteRecipe() {
                             <span class="fs-3 text-success">
                                 {{ recipe.title }}
                             </span>
-                            <span><button @click="deleteRecipe()" class="btn btn-danger ms-2 rounded rounded-pill">Delete</button></span>
+                            <span v-if="recipe.creatorId == account.id"><button @click="deleteRecipe()" class="btn btn-danger ms-2 rounded rounded-pill">Delete</button></span>
                         </div>
                         <div>
                             by: {{ recipe.creator.name }}

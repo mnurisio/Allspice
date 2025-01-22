@@ -19,18 +19,13 @@ const editableRecipeData = ref({
 
 async function createRecipe() {
     try {
-        const recipe = await recipeService.createRecipe(editableRecipeData.value)
-
+        await recipeService.createRecipe(editableRecipeData.value)
         editableRecipeData.value = {
             title: '',
             category: '',
             img: ''
         }
-
-        recipeService.setActiveRecipe(recipe)
-
-        // Modal.getInstance('#createRecipeModal').hide()
-
+        Modal.getInstance('#recipeModal').show()
     }
     catch (error) {
         Pop.error(error);
