@@ -8,6 +8,7 @@ import { ingredientService } from '@/services/IngredientsService';
 
 
 
+
 const recipe = computed(() => AppState.activeRecipe)
 const ingredients = computed(() => AppState.ingredients)
 const account = computed(() => AppState.account)
@@ -18,7 +19,7 @@ const editMode = ref(false)
 const editableIngredientData = ref({
     quantity: '',
     name: '',
-    recipeId: ''
+    recipeId: '',
 })
 
 async function createIngredient() {
@@ -28,7 +29,7 @@ async function createIngredient() {
         editableIngredientData.value = {
             quantity: '',
             name: '',
-            recipeId: ''
+            recipeId: '',
         }
     }
     catch (error) {
@@ -49,14 +50,16 @@ async function deleteRecipe() {
     }
 }
 
-// async function deleteIngredient(){
-//     try {
-      
-//     }
-//     catch (error){
-//       Pop.error(error);
-//     }
-// }
+async function deleteIngredient(ingredientId){
+    try {
+        const confirm = await Pop.confirm("are you sure you want to delete this ingredient?")
+        if (!confirm) return
+        await ingredientService.deleteIngredient(ingredientId)
+    }
+    catch (error){
+    Pop.error(error);
+    }
+}
 
 
 </script>
@@ -73,7 +76,7 @@ async function deleteRecipe() {
                     </div>
                     <div class="col-6">
                         <div class="row">
-                            <span role="button" data-bs-dismiss="modal" class="text-end">
+                            <span @click="editMode = false" role="button" data-bs-dismiss="modal" class="text-end">
                                 <i class="mdi mdi-close-thick p-2"></i>
                             </span>
                         </div>
@@ -102,7 +105,7 @@ async function deleteRecipe() {
                         </div>
                         <div v-for="ingredient in ingredients" :key="ingredient.id">
                             <div class="mb-2">
-                                <span v-if="editMode == true"><i class="mdi mdi-delete-outline"></i> {{ ingredient.quantity }} {{ ingredient.name }}</span>
+                                <span v-if="editMode == true" role="button" @click="deleteIngredient(ingredient.id)"><i class="mdi mdi-delete-outline"></i> {{ ingredient.quantity }} {{ ingredient.name }}</span>
                             </div>
                         </div>
                         <form class="me-3 mt-4 row" v-if="editMode == true" @submit.prevent="createIngredient()">
