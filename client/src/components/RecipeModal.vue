@@ -50,7 +50,7 @@ async function deleteRecipe() {
                             <span class="fs-3 text-success">
                                 {{ recipe.title }}
                             </span>
-                            <span v-if="recipe.creatorId == account.id"><button @click="deleteRecipe()" class="btn btn-danger ms-2 rounded rounded-pill">Delete</button></span>
+                            <span v-if="recipe.creatorId == account.id"><button class="btn btn-primary rounded rounded-pill ms-2">Edit</button><button @click="deleteRecipe()" class="btn btn-danger ms-2 rounded rounded-pill">Delete</button></span>
                         </div>
                         <div>
                             by: {{ recipe.creator.name }}

@@ -6,9 +6,10 @@ import { AppState } from "@/AppState.js"
 
 class RecipeService {
     async deleteRecipe() {
-        const response = AppState.activeRecipe
-        logger.log('deleting recipe', response)
-        const recipeToDelete = AppState.recipe.indexOf(response)
+        const recipe = AppState.activeRecipe
+        const response = await api.delete(`api/recipes/${recipe.id}`)
+        logger.log('deleting recipe', response.data)
+        const recipeToDelete = AppState.recipe.indexOf(recipe)
         AppState.recipe.splice(recipeToDelete, 1)
         AppState.activeRecipe = null
     }
