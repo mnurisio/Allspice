@@ -3,6 +3,9 @@ import Navbar from './components/Navbar.vue';
 import { AppState } from './AppState.js';
 import RecipeModal from './components/RecipeModal.vue';
 import { Recipe } from './models/Recipe';
+import ModalWrapper from './components/ModalWrapper.vue';
+
+
 
 </script>
 
@@ -17,12 +20,15 @@ import { Recipe } from './models/Recipe';
     Made with 💖 by CodeWorks
   </footer>
 
-
-  <RecipeModal />
+  <ModalWrapper modalId="recipeModal" modal-title="Fire Recipe">
+    <RecipeModal />
+  </ModalWrapper>
+  
 </template>
 
 <style lang="scss">
 @import '@/assets/scss/main.scss';
+
 :root {
   --main-height: calc(100vh - 32px - 64px);
 }

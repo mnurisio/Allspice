@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState';
+import CreateRecipeForm from '@/components/CreateRecipeForm.vue';
 import RecipeCard from '@/components/RecipeCard.vue';
 import { recipeService } from '@/services/RecipeService';
 import { logger } from '@/utils/Logger';
@@ -44,7 +45,9 @@ async function getAllRecipes() {
             <div class="col-md-3"><span class="homeLinks" role="button">Home</span></div>
             <div class="col-md-3"><span class="homeLinks" role="button">My Recipes</span></div>
             <div class="col-md-3"><span class="homeLinks" role="button">Favorites</span></div>
-            <div class="col-md-3"><span class="homeLinks" role="button">Create Recipe</span></div>
+            <div class="col-md-3">
+              <span class="homeLinks" role="button" data-bs-toggle="modal" data-bs-target="createRecipeModal">Create Recipe</span>
+            </div>
           </div>
           <div v-else class="row text-center text-success p-3 sahitya-regular fs-3 Shadow">
             <div class="col-md-4"><span class="homeLinks" role="button">Home</span></div>
@@ -62,6 +65,9 @@ async function getAllRecipes() {
       </div>
     </div>
   </div>
+  <ModalWrapper modalId="createRecipeModal" modal-title="Create Fire Recipe">
+    <CreateRecipeForm />
+  </ModalWrapper>
 </template>
 
 <style scoped lang="scss">
@@ -87,7 +93,7 @@ async function getAllRecipes() {
   text-decoration: underline;
 }
 
-.Shadow{
+.Shadow {
   box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
 }
 </style>
