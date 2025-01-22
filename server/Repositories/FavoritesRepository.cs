@@ -32,6 +32,7 @@ public class FavoritesRepository
 
         FavoriteRecipe FavoriteRecipe = _db.Query(sql, (Favorite favorite, FavoriteProfile account, FavoriteRecipe recipe) =>
         {
+            recipe.AccountId = account.Id;
             recipe.Creator = account;
             recipe.FavoriteId = favorite.Id;
             return recipe;

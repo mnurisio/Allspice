@@ -5,6 +5,7 @@ import Pop from '@/utils/Pop';
 import { Modal } from 'bootstrap';
 import { computed, ref } from 'vue';
 import { ingredientService } from '@/services/IngredientsService';
+import { favoritesService } from '@/services/FavoritesService';
 
 
 
@@ -21,6 +22,25 @@ const editableIngredientData = ref({
     name: '',
     recipeId: '',
 })
+
+const editableFavoriteData = ref({
+    recipeId: '',
+    accountId: ''
+})
+
+
+
+async function createFavorite() {
+    try {
+        editableFavoriteData.value.recipeId = recipe.value.id
+        editableFavoriteData.value.accountId = account.value.id
+        await favoritesService.createFavorite(editableFavoriteData.value)
+    }
+    catch (error) {
+        Pop.error(error);
+    }
+}
+
 
 async function createIngredient() {
     try {
@@ -66,8 +86,7 @@ async function deleteIngredient(ingredientId){
 
 
 <template>
-    <div class="container-fluid modal fade " id="recipeModal" tabindex="-1" aria-labelledby="recipeModalLabel"
-        aria-hidden="true">
+    <div class="container-fluid modal fade " id="recipeModal" tabindex="-1" aria-labelledby="recipeModalLabel">
         <div class="modal-dialog modal-lg">
             <div v-if="recipe" class="modal-content">
                 <div class="row">
@@ -95,11 +114,17 @@ async function deleteIngredient(ingredientId){
                         </div>
                         <div>
                             by: {{ recipe.creator.name }}
-                            <div class="my-md-2">
-                                <span class="rounded rounded-pill bg-secondary text-light py-md-1 px-md-2">{{
-                                    recipe.category }}</span>
-                            </div>
                         </div>
+                            <div class="row my-2">
+                                <div class="col-md-2 text-center">
+                                    <span @click="createFavorite()" role="button" class=" px-2 py-1 bg-secondary rounded rounded-pill">❣️</span>
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="px-2 py-1 rounded rounded-pill bg-secondary text-light">
+                                        {{ recipe.category }}
+                                    </span>
+                                </div>
+                            </div>
                         <div class="mb-4">
                             <h5>Ingredients</h5>
                         </div>

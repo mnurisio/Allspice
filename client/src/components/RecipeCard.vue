@@ -1,16 +1,20 @@
 <script setup>
+import { AppState } from '@/AppState';
 import { Recipe } from '@/models/Recipe';
 import { ingredientService } from '@/services/IngredientsService';
 import { recipeService } from '@/services/RecipeService';
+import Pop from '@/utils/Pop';
+import { computed, ref } from 'vue';
+
 
 
 
 const props = defineProps({
-    recipe: {type: Recipe, required: true}
-}) 
+    recipe: { type: Recipe, required: true }
+})
 
 
-async function setActiveRecipe(){
+async function setActiveRecipe() {
     recipeService.setActiveRecipe(props.recipe)
     await ingredientService.getIngredientsByRecipeId(props.recipe.id)
 }
@@ -22,14 +26,11 @@ async function setActiveRecipe(){
 
 <template>
     <div @click="setActiveRecipe()" role="button" data-bs-toggle="modal" data-bs-target="#recipeModal">
-        <div class="recipeCard card my-md-4" :style="{backgroundImage: `url(${recipe.img})`}">
+        <div class="recipeCard card my-md-4" :style="{ backgroundImage: `url(${recipe.img})` }">
             <div class="card-body text-light align-items-between">
                 <div class=" row justify-content-between">
                     <div class="col-md-4">
                         <span class="bg-secondary py-md-1 px-md-2 rounded rounded-pill">{{ recipe.category }}</span>
-                    </div>
-                    <div class="col-md-2">
-                        <span class="bg-secondary py-md-1 px-md-2 rounded rounded-pill">❣️</span>
                     </div>
                 </div>
                 <div class="row px-md-2 pt-md-2">
@@ -44,7 +45,7 @@ async function setActiveRecipe(){
 
 
 <style lang="scss" scoped>
-.recipeCard{
+.recipeCard {
     background-size: cover;
     background-position: center;
     min-height: 20dvh;
