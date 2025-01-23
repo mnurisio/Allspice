@@ -4,8 +4,12 @@ import { Favorite } from "@/models/Favorite.js"
 import { AppState } from "@/AppState.js"
 
 
-class FavoritesService{
-   async createFavorite(favoriteData) {
+class FavoritesService {
+    async getAccountFavorites() {
+        const response = await api.get('account/favorites')
+        logger.log('my favorite profiles', response.data)
+    }
+    async createFavorite(favoriteData) {
         const response = await api.post('api/favorites', favoriteData)
         logger.log('favoriting recipe', response.data)
         const favorites = new Favorite(response.data)

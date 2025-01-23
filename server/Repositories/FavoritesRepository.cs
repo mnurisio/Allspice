@@ -56,7 +56,7 @@ public class FavoritesRepository
 
         List<FavoriteRecipe> favoriteRecipes = _db.Query(sql, (Favorite favorite, FavoriteRecipe recipe, Profile account) =>
         {
-            recipe.AccountId = favorite.AccountId;
+            recipe.AccountId = account.Id;
             recipe.FavoriteId = favorite.Id;
             recipe.Creator = account;
             return recipe;

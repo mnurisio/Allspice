@@ -3,6 +3,7 @@ import { AppState } from '@/AppState';
 import CreateRecipeForm from '@/components/CreateRecipeForm.vue';
 import ModalWrapper from '@/components/ModalWrapper.vue';
 import RecipeCard from '@/components/RecipeCard.vue';
+import { favoritesService } from '@/services/FavoritesService';
 import { recipeService } from '@/services/RecipeService';
 import { logger } from '@/utils/Logger';
 import Pop from '@/utils/Pop';
@@ -18,6 +19,8 @@ onMounted(() => {
   getAllRecipes()
 })
 
+watch(account, getAccountFavorites)
+
 
 
 async function getAllRecipes() {
@@ -27,8 +30,17 @@ async function getAllRecipes() {
   catch (error) {
     logger.error(error);
   }
-
 }
+
+async function getAccountFavorites(){
+  try {
+    await favoritesService.getAccountFavorites()
+  }
+  catch (error){
+    Pop.error(error);
+  }
+}
+
 </script>
 
 <template>

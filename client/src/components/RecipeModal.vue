@@ -31,6 +31,7 @@ const editableFavoriteData = ref({
 
 
 
+
 async function createFavorite() {
     try {
         editableFavoriteData.value.recipeId = recipe.value.id
