@@ -5,5 +5,6 @@ export class Favorite{
         this.updatedAt = new Date (data.updatedAt)
         this.recipeId = data.recipeId
         this.accountId = data.accountId
+        this.favoriteId = data.favoriteId
     }
 }

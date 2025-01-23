@@ -103,3 +103,6 @@ SELECT
         FROM ingredients 
         JOIN recipes ON recipes.id = ingredients.recipe_id
         WHERE ingredients.id = 3
+
+
+        SELECT * From recipes
