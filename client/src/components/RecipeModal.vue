@@ -99,12 +99,12 @@ async function deleteIngredient(ingredientId) {
 <template>
     <div class="container-fluid modal fade " id="recipeModal" tabindex="-1" aria-labelledby="recipeModalLabel">
         <div class="modal-dialog modal-lg">
-            <div v-if="recipe" class="modal-content">
+            <div v-if="recipe" class="modal-content container">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 ps-0">
                         <img class="img-fluid w-100 h-100" :src="recipe.img" :alt="recipe.title">
                     </div>
-                    <div class="col-6">
+                    <div class="col-md-6">
                         <div class="row">
                             <span @click="editMode = false" role="button" data-bs-dismiss="modal" class="text-end">
                                 <i class="mdi mdi-close-thick p-2"></i>
@@ -196,6 +196,9 @@ async function deleteIngredient(ingredientId) {
 
 .categoryName {
     background-color: #ffffffa4;
+}
+.modal-content{
+    overflow: hidden;
 }
 
 </style>

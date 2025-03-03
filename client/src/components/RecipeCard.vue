@@ -26,16 +26,14 @@ async function setActiveRecipe() {
 
 <template>
     <div @click="setActiveRecipe()" role="button" data-bs-toggle="modal" data-bs-target="#recipeModal">
-        <div class="recipeCard card my-md-4" :style="{ backgroundImage: `url(${recipe.img})` }">
-            <div class="card-body text-light align-items-between">
-                <div class=" row justify-content-between">
-                    <div class="col-md-4">
-                        <span class="bg-secondary py-md-1 px-md-2 rounded rounded-pill">{{ recipe.category }}</span>
+        <div class="recipeCard card my-md-4 my-2 sahitya-regular fs-4" :style="{ backgroundImage: `url(${recipe.img})` }">
+            <div class="card-body text-light container">
+                <div class="row justify-content-between">
+                    <div class="col-md-7 recipe-title">
+                            {{ recipe.title }}
                     </div>
-                </div>
-                <div class="row px-md-2 pt-md-2">
-                    <div class="bg-secondary">
-                        {{ recipe.title }}
+                    <div class="col-md-3">
+                            {{ recipe.category }}
                     </div>
                 </div>
             </div>
@@ -50,5 +48,22 @@ async function setActiveRecipe() {
     background-position: center;
     min-height: 20dvh;
     box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+}
+
+.card-body{
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    background: linear-gradient(to bottom, rgb(0, 0, 0, 0.1), rgb(0, 0, 0, 0.7));
+    overflow: hidden;
+}
+
+.recipe-title{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 </style>
