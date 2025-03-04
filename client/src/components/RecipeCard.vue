@@ -49,10 +49,6 @@ async function createFavorite() {
     }
 }
 
-function handleFavoriteClick(event) {
-    event.stopPropagation(); // Force stop event bubbling
-    event.preventDefault(); // Prevent any unintended default behavior
-}
 
 </script>
 
@@ -61,7 +57,7 @@ function handleFavoriteClick(event) {
 
     <div class="main-card">
         <div class="recipeCard card my-md-4 my-2 sahitya-regular fs-4" :style="{ backgroundImage: `url(${recipe.img})` }">
-            <div @click="handleFavoriteClick" class="favorite-button text-light">
+            <div  class="favorite-button text-light">
                 <span v-if="favoritedData" @click="deleteFavorite(favoritedData.favoriteId)" role="button" class="text-danger">
                     <i class="mdi mdi-heart"></i>
                 </span>

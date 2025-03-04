@@ -71,24 +71,21 @@ async function deleteIngredient(ingredientId) {
         <div class="modal-dialog modal-lg">
             <div v-if="recipe" class="modal-content container">
                 <div class="row">
-                    <div class="col-md-6 ps-0">
+                    <div class="col-md-6 px-0">
                         <img class="img-fluid w-100 h-100" :src="recipe.img" :alt="recipe.title">
                     </div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <span @click="editMode = false" role="button" data-bs-dismiss="modal" class="text-end">
-                                <i class="mdi mdi-close-thick p-2"></i>
-                            </span>
+                    <div class="col-md-6 pe-md-0">
+                        <div class="text-end" @click="editMode = false" role="button" data-bs-dismiss="modal">
+                            <i class="mdi mdi-close-thick fs-5"></i>
                         </div>
-                        <div class="fs-3 text-success">
-                            <p class="m-0">{{ recipe.title }}</p>
-                        </div>
-                        <div class="row justify-content-between">
-                            <div v-if="recipe.creatorId == account?.id" class="dropdown col-4 align-self-center">
-                                <button class="btn btn-secondary dropdown-toggle" type="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Options
-                                </button>
+                        <div class="row justify-content-between w-100">
+                            <div class="recipe-title col-md-8 text-success sahitya-regular pe-0">
+                                <h3 class="m-0">{{ recipe.title }}</h3>
+                            </div>
+                            <div v-if="recipe.creatorId == account?.id" class="col-2 align-self-center px-0 text-center">
+                                <div type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="mdi mdi-dots-horizontal fs-4"></i>
+                                </div>
                                 <ul class="dropdown-menu">
                                     <li><button @click="editMode = true" :hidden="editMode == true"
                                             class="btn btn-primary rounded rounded-pill ms-2">Edit</button></li>
@@ -109,19 +106,23 @@ async function deleteIngredient(ingredientId) {
                                 </span>
                             </div>
                         </div>
-                        <div class="mb-4">
+                        <div class="mb-1">
                             <h5>Ingredients</h5>
                         </div>
                         <div v-for="ingredient in ingredients" :key="ingredient.id">
-                            <div class="mb-2">
-                                <span v-if="editMode == true" role="button" @click="deleteIngredient(ingredient.id)"><i
-                                        class="mdi mdi-delete-outline"></i> {{ ingredient.quantity }} {{ ingredient.name
-                                        }}
+                            <div class="mb-1">
+                                <span v-if="editMode == true">
+                                    <i class="mdi mdi-delete-outline text-danger" role="button"
+                                        @click="deleteIngredient(ingredient.id)"></i> {{ ingredient.quantity }} {{
+                                            ingredient.name }}
+                                </span>
+                                <span v-else>
+                                    {{ ingredient.quantity }} {{ ingredient.name }}
                                 </span>
                             </div>
                         </div>
-                        <form class="me-3 mt-4 row" v-if="editMode == true" @submit.prevent="createIngredient()">
-                            <div class="form-floating mb-3 col-6 px-1">
+                        <form class="row" v-if="editMode == true" @submit.prevent="createIngredient()">
+                            <div class="form-floating mb-3 col-4 px-1">
                                 <input v-model="editableIngredientData.quantity" type="text" class="form-control"
                                     id="quantity" placeholder="Quantity" required>
                                 <label for="title">Quantity</label>
@@ -150,6 +151,13 @@ async function deleteIngredient(ingredientId) {
 
 
 <style lang="scss" scoped>
+
+.recipe-title{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .img {
     object-fit: cover;
     object-position: center;
