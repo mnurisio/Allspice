@@ -49,18 +49,19 @@ async function createFavorite() {
     }
 }
 
-
+function handleFavoriteClick(event) {
+    event.stopPropagation(); // Force stop event bubbling
+    event.preventDefault(); // Prevent any unintended default behavior
+}
 
 </script>
 
 
 <template>
 
-    <div class="main-card" role="button" data-bs-toggle="modal" data-bs-target="#recipeModal">
-        <div class="recipeCard card my-md-4 my-2 sahitya-regular fs-4"
-            :style="{ backgroundImage: `url(${recipe.img})` }">
-
-            <div class="favorite-button text-light">
+    <div class="main-card">
+        <div class="recipeCard card my-md-4 my-2 sahitya-regular fs-4" :style="{ backgroundImage: `url(${recipe.img})` }">
+            <div @click="handleFavoriteClick" class="favorite-button text-light">
                 <span v-if="favoritedData" @click="deleteFavorite(favoritedData.favoriteId)" role="button" class="text-danger">
                     <i class="mdi mdi-heart"></i>
                 </span>
@@ -68,10 +69,8 @@ async function createFavorite() {
                     <i class="mdi mdi-heart-outline"></i>
                 </span>
             </div>
-
-            <div @click="setActiveRecipe()"  class="card-body text-light container">
+            <div @click="setActiveRecipe()" role="button" data-bs-toggle="modal" data-bs-target="#recipeModal" class="card-body text-light container">
                 <div class="row justify-content-between">
-
                     <div class="col-md-7 recipe-title">
                         {{ recipe.title }}
                     </div>
