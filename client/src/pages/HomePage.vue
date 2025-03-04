@@ -41,6 +41,16 @@ async function getAccountFavorites(){
   }
 }
 
+async function getMyRecipes(){
+  try {
+    const accountId = account.value.id
+    await recipeService.getMyRecipes(accountId)
+  }
+  catch (error){
+    Pop.error(error);
+  }
+}
+
 </script>
 
 <template>
@@ -51,20 +61,15 @@ async function getAccountFavorites(){
         <p class="fs-4 m-1 titleSlogan">Cherish Your Family</p>
         <p class="fs-4 m-1 titleSlogan">And Their Cooking</p>
       </div>
-      <div class="row justify-content-center mainMenu">
+      <div  v-if="account" class="row justify-content-center mainMenu">
         <div class="col-md-5 card mb-5">
-          <div v-if="account" class="row text-center text-success p-3 sahitya-regular fs-4 Shadow">
-            <div class="col-md-3 align-self-center"><span class="homeLinks" role="button">All Recipes</span></div>
-            <div class="col-md-3 align-self-center"><span class="homeLinks" role="button">My Recipes</span></div>
+          <div class="row text-center text-success p-3 sahitya-regular fs-4 Shadow">
+            <div @click="getAllRecipes()" class="col-md-3 align-self-center"><span class="homeLinks" role="button">All Recipes</span></div>
+            <div @click="getMyRecipes()" class="col-md-3 align-self-center"><span class="homeLinks" role="button">My Recipes</span></div>
             <div class="col-md-3 align-self-center"><span class="homeLinks" role="button">Favorites</span></div>
             <div class="col-md-3 align-self-center">
               <span class="homeLinks" role="button" data-bs-toggle="modal" data-bs-target="#createRecipeModal">Create Recipe</span>
             </div>
-          </div>
-          <div v-else class="row text-center text-success p-3 sahitya-regular fs-3 Shadow">
-            <div class="col-md-4 align-self-center"><span class="homeLinks" role="button">Home</span></div>
-            <div class="col-md-4 align-self-center"><span class="homeLinks" role="button">My Recipes</span></div>
-            <div class="col-md-4 align-self-center"><span class="homeLinks" role="button">Favorites</span></div>
           </div>
         </div>
       </div>

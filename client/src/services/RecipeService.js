@@ -2,9 +2,15 @@ import { logger } from "@/utils/Logger.js"
 import { api } from "./AxiosService.js"
 import { Recipe } from "@/models/Recipe.js"
 import { AppState } from "@/AppState.js"
+import { Account } from "@/models/Account.js"
 
 
 class RecipeService {
+    getMyRecipes(accountId) {
+        const recipes = AppState.recipe.filter(recipe => recipe.creatorId == accountId)
+        logger.log('getting my recipes')
+        AppState.recipe = recipes
+    }
     async deleteRecipe() {
         const recipe = AppState.activeRecipe
         const response = await api.delete(`api/recipes/${recipe.id}`)
@@ -30,6 +36,7 @@ class RecipeService {
     }
 
     async getAllRecipes() {
+        AppState.recipe = []
         const response = await api.get('api/recipes')
         logger.log('got all recipes', response.data)
         const recipes = response.data.map(recipePOJO => new Recipe(recipePOJO))

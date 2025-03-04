@@ -21,9 +21,7 @@ const props = defineProps({
     recipe: { type: Recipe, required: true }
 })
 
-function handleFavoriteClick(event) {
-    event.stopPropagation()
-}
+
 
 async function setActiveRecipe() {
     recipeService.setActiveRecipe(props.recipe)
