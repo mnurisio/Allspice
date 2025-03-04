@@ -32,7 +32,7 @@ async function setActiveRecipe() {
                     <div class="col-md-7 recipe-title">
                             {{ recipe.title }}
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 recipe-title text-md-center">
                             {{ recipe.category }}
                     </div>
                 </div>
@@ -58,6 +58,8 @@ async function setActiveRecipe() {
     flex-direction: column;
     justify-content: end;
     background: linear-gradient(to bottom, rgb(0, 0, 0, 0.1), rgb(0, 0, 0, 0.7));
+    border-bottom-right-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
     overflow: hidden;
 }
 
@@ -65,5 +67,6 @@ async function setActiveRecipe() {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-shadow: 1px 1px 1px black;
 }
 </style>
