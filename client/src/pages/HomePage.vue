@@ -44,18 +44,17 @@ async function getAccountFavorites(){
 </script>
 
 <template>
-  <!-- //NOTE "Top of page" -->
-  <div class="container-fluid">
+  <div class="container">
     <div class="row bg-hero justify-content-center p-md-5">
-      <div class="col-12 text-light text-center p-md-5 sahitya-regular titleSlogan">
+      <div class="col-3 text-light text-center m-md-5 sahitya-bold titleSlogan">
         <p class="fs-1 m-2 titleSlogan">All-Spice</p>
         <p class="fs-4 m-1 titleSlogan">Cherish Your Family</p>
         <p class="fs-4 m-1 titleSlogan">And Their Cooking</p>
       </div>
       <div class="row justify-content-center mainMenu">
         <div class="col-md-5 card mb-5">
-          <div v-if="account" class="row text-center text-success p-3 sahitya-regular fs-3 Shadow">
-            <div class="col-md-3 align-self-center"><span class="homeLinks" role="button">Home</span></div>
+          <div v-if="account" class="row text-center text-success p-3 sahitya-regular fs-4 Shadow">
+            <div class="col-md-3 align-self-center"><span class="homeLinks" role="button">All Recipes</span></div>
             <div class="col-md-3 align-self-center"><span class="homeLinks" role="button">My Recipes</span></div>
             <div class="col-md-3 align-self-center"><span class="homeLinks" role="button">Favorites</span></div>
             <div class="col-md-3 align-self-center">
@@ -87,11 +86,12 @@ async function getAccountFavorites(){
 
 @media(min-width: 768px){
   .bg-hero {
-    background-image: url('https://images.unsplash.com/photo-1515823808611-65fd8e56c71a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDR8fHJ1c3RpYyUyMGZvb2R8ZW58MHx8MHx8fDI%3D');
+    background-image: url('https://images.unsplash.com/photo-1604740795024-c06eeca4bf89?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzN8fHJ1c3RpYyUyMGNvb2tpbmd8ZW58MHx8MHx8fDI%3D');
     background-size: cover;
     background-position: center;
     margin: 1% 0.5%;
     box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    border-radius: 1rem;
   }
   .mainMenu {
     position: relative;
@@ -99,6 +99,7 @@ async function getAccountFavorites(){
   }
   .titleSlogan {
     text-shadow: 1px 1px black;
+    backdrop-filter: blur(5px);
     user-select: none;
   }
 }

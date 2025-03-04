@@ -5,16 +5,13 @@ import Pop from '@/utils/Pop';
 import { Modal } from 'bootstrap';
 import { computed, ref } from 'vue';
 import { ingredientService } from '@/services/IngredientsService';
-import { favoritesService } from '@/services/FavoritesService';
 
 
 
-const favorites = computed(() => AppState.favorites)
+
 const recipe = computed(() => AppState.activeRecipe)
 const ingredients = computed(() => AppState.ingredients)
 const account = computed(() => AppState.account)
-const isFavorited = computed(() => favorites.value.some(favorites => favorites.accountId == account?.value.id))
-const favoritedData = computed(() => AppState.favorites.find(favorite => favorite.id == recipe.value.id))
 
 const editMode = ref(false)
 
@@ -25,33 +22,6 @@ const editableIngredientData = ref({
     name: '',
     recipeId: '',
 })
-
-const editableFavoriteData = ref({
-    recipeId: '',
-    accountId: ''
-})
-
-
-async function deleteFavorite(favoriteId){
-    try {
-    await favoritesService.deleteFavorite(favoriteId)
-    }
-    catch (error){
-    Pop.error(error);
-    }
-}
-
-async function createFavorite() {
-    try {
-        editableFavoriteData.value.recipeId = recipe.value.id
-        editableFavoriteData.value.accountId = account.value.id
-        await favoritesService.createFavorite(editableFavoriteData.value)
-    }
-    catch (error) {
-        Pop.error(error);
-    }
-}
-
 
 async function createIngredient() {
     try {
@@ -128,16 +98,6 @@ async function deleteIngredient(ingredientId) {
                                             class="btn btn-danger ms-2 rounded rounded-pill">Delete</button></li>
                                 </ul>
                             </div>
-                            <div class="col-4 align-self-center" >
-                                <div>
-                                    <span v-if="favoritedData" @click="deleteFavorite(favoritedData.favoriteId)" role="button">
-                                        <i class="mdi mdi-heart"></i>
-                                    </span>
-                                    <span v-else @click="createFavorite()" role="button">
-                                        <i class="mdi mdi-heart-outline"></i>
-                                    </span>
-                                </div>
-                            </div>
                         </div>
                         <div>
                             by: {{ recipe.creator.name }}
@@ -155,8 +115,9 @@ async function deleteIngredient(ingredientId) {
                         <div v-for="ingredient in ingredients" :key="ingredient.id">
                             <div class="mb-2">
                                 <span v-if="editMode == true" role="button" @click="deleteIngredient(ingredient.id)"><i
-                                        class="mdi mdi-delete-outline"></i> {{ ingredient.quantity }} {{ ingredient.name }}
-                                    </span>
+                                        class="mdi mdi-delete-outline"></i> {{ ingredient.quantity }} {{ ingredient.name
+                                        }}
+                                </span>
                             </div>
                         </div>
                         <form class="me-3 mt-4 row" v-if="editMode == true" @submit.prevent="createIngredient()">
@@ -197,8 +158,8 @@ async function deleteIngredient(ingredientId) {
 .categoryName {
     background-color: #ffffffa4;
 }
-.modal-content{
+
+.modal-content {
     overflow: hidden;
 }
-
 </style>
