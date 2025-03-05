@@ -27,4 +27,25 @@ footer {
   place-content: center;
   height: 32px;
 }
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: #219653;
+    border-radius: 4px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background: #176d73;
+}
 </style>
