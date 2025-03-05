@@ -111,10 +111,10 @@ async function deleteIngredient(ingredientId) {
                                 {{ recipe.creator.name }}
                             </span>
                         </div>
-                        <div class="mb-1">
-                            <h5 class="ingredient-title sahitya-bold">Ingredients</h5>
+                        <div>
+                            <h5 class="ingredient-title sahitya-bold m-0">Ingredients</h5>
                         </div>
-                        <div class="ingredient-list">
+                        <div class="ingredient-list my-2">
                             <div v-for="ingredient in ingredients" :key="ingredient.id">
                                 <div class="mb-1">
                                     <span v-if="editMode == true">
@@ -123,7 +123,8 @@ async function deleteIngredient(ingredientId) {
                                                 ingredient.name }}
                                     </span>
                                     <span v-else>
-                                        {{ ingredient.quantity }} {{ ingredient.name }}
+                                        <span class="sahitya-regular me-2">{{ ingredient.quantity }} </span>
+                                        <span class="sahitya-italic"> {{ ingredient.name }}</span>
                                     </span>
                                 </div>
                             </div>
@@ -140,13 +141,13 @@ async function deleteIngredient(ingredientId) {
                                 <label for="name">Name</label>
                             </div>
                             <div class="text-start mb-2">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button role="button" type="submit" class="form-submit sahitya-regular">Submit</button>
                             </div>
                         </form>
                         <div class="mb-4">
-                            <h5>Instructions</h5>
+                            <h5 class="ingredient-title sahitya-bold m-0">Instructions</h5>
                         </div>
-                        <div>
+                        <div class="ingredient-list">
                             <p>{{ recipe.instructions }}</p>
                         </div>
                     </div>
@@ -209,5 +210,12 @@ async function deleteIngredient(ingredientId) {
 
 .ingredient-list::-webkit-scrollbar-thumb:hover {
     background: #176d73;
+}
+
+.form-submit{
+    cursor: pointer;
+    background-color: #527360;
+    border-radius: 0.5rem;
+    color: white;
 }
 </style>

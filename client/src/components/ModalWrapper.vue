@@ -16,7 +16,7 @@ defineProps({
     <div class="modal fade" :id="modalId" tabindex="-1" :aria-labelledby="modalId">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header sahitya-regular">
                     <h1 class="modal-title fs-5" :id="modalId + 'Label'">{{ modalTitle }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -33,4 +33,11 @@ defineProps({
 </template>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+.modal-header {
+    background-color: #527360;
+    color: white;
+}
+
+</style>

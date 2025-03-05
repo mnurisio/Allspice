@@ -82,7 +82,7 @@ async function getMyRecipes(){
       </div>
     </div>
   </div>
-  <ModalWrapper modalId="createRecipeModal" modalTitle="Create Fire Recipe">
+  <ModalWrapper modalId="createRecipeModal" modalTitle="Create Recipe">
     <CreateRecipeForm />
   </ModalWrapper>
 </template>
