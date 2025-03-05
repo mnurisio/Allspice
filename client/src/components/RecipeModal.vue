@@ -23,6 +23,10 @@ const editableIngredientData = ref({
     recipeId: '',
 })
 
+const editableRecipeData = ref({
+    instructions: recipe.value?.instructions,
+})
+
 async function createIngredient() {
     try {
         editableIngredientData.value.recipeId = recipe.value.id
@@ -32,6 +36,17 @@ async function createIngredient() {
             name: '',
             recipeId: '',
         }
+    }
+    catch (error) {
+        Pop.error(error);
+    }
+}
+
+async function updateInstructions() {
+    try {
+        const recipeId = recipe.value.id
+        await recipeService.updateInstructions(editableRecipeData.value, recipeId)
+        editMode.value = false
     }
     catch (error) {
         Pop.error(error);
@@ -76,7 +91,7 @@ async function deleteIngredient(ingredientId) {
                     </div>
                     <div class="col-md-6 pe-md-0">
                         <div class="text-end" @click="editMode = false" role="button" data-bs-dismiss="modal">
-                            <i class="mdi mdi-close-thick fs-5 pe-1"></i>
+                            <i class="mdi mdi-close fs-5 pe-1"></i>
                         </div>
                         <div class="row justify-content-between w-100">
                             <div class="recipe-title col-8 text-success sahitya-regular pe-0">
@@ -106,7 +121,6 @@ async function deleteIngredient(ingredientId) {
                             <span class="sahitya-bold">
                                 {{ recipe.category }} by:
                             </span>
-
                             <span class="sahitya-italic">
                                 {{ recipe.creator.name }}
                             </span>
@@ -119,8 +133,9 @@ async function deleteIngredient(ingredientId) {
                                 <div class="mb-1">
                                     <span v-if="editMode == true">
                                         <i class="mdi mdi-delete-outline text-danger" role="button"
-                                            @click="deleteIngredient(ingredient.id)"></i> {{ ingredient.quantity }} {{
-                                                ingredient.name }}
+                                            @click="deleteIngredient(ingredient.id)"></i>
+                                        <span class="sahitya-regular mx-2">{{ ingredient.quantity }} </span>
+                                        <span class="sahitya-italic"> {{ ingredient.name }}</span>
                                     </span>
                                     <span v-else>
                                         <span class="sahitya-regular me-2">{{ ingredient.quantity }} </span>
@@ -141,14 +156,24 @@ async function deleteIngredient(ingredientId) {
                                 <label for="name">Name</label>
                             </div>
                             <div class="text-start mb-2">
-                                <button role="button" type="submit" class="form-submit sahitya-regular">Submit</button>
+                                <button role="button" type="submit" class="form-submit sahitya-regular">Add Ingredient</button>
                             </div>
                         </form>
-                        <div class="mb-4">
+                        <div class="mb-2">
                             <h5 class="ingredient-title sahitya-bold m-0">Instructions</h5>
                         </div>
                         <div class="ingredient-list">
-                            <p>{{ recipe.instructions }}</p>
+                            <form v-if="editMode == true" @submit.prevent="updateInstructions()">
+                                <textarea v-model="editableRecipeData.instructions" type="textarea"
+                                    class="form-control mb-2" id="instructions" placeholder="Instructions..." required
+                                    rows="5" minlength="5" maxlength="1000">
+                                </textarea>
+                                <div class="text-start mb-2">
+                                    <button role="button" type="submit"
+                                        class="form-submit sahitya-regular">Submit</button>
+                                </div>
+                            </form>
+                            <p v-else class="sahitya-regular">{{ recipe.instructions }}</p>
                         </div>
                     </div>
                 </div>
@@ -187,7 +212,7 @@ async function deleteIngredient(ingredientId) {
 }
 
 .ingredient-list {
-    height: 10rem;
+    height: 11rem;
     overflow-y: scroll;
 }
 
@@ -212,7 +237,7 @@ async function deleteIngredient(ingredientId) {
     background: #176d73;
 }
 
-.form-submit{
+.form-submit {
     cursor: pointer;
     background-color: #527360;
     border-radius: 0.5rem;

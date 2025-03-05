@@ -77,4 +77,5 @@ async function createRecipe() {
     border-radius: 0.5rem;
     color: white;
 }
+
 </style>

@@ -6,6 +6,7 @@ import { Account } from "@/models/Account.js"
 
 
 class RecipeService {
+
     getMyRecipes(accountId) {
         const recipes = AppState.recipe.filter(recipe => recipe.creatorId == accountId)
         logger.log('getting my recipes')
@@ -41,6 +42,13 @@ class RecipeService {
         logger.log('got all recipes', response.data)
         const recipes = response.data.map(recipePOJO => new Recipe(recipePOJO))
         AppState.recipe = recipes
+    }
+
+    async updateInstructions(recipeData, recipeId) {
+        const response = await api.put(`api/recipes/${recipeId}`, recipeData)
+        logger.log(`updating instructions`, response.data)
+        const recipe = new Recipe(response.data)
+        AppState.activeRecipe = recipe
     }
 
 }

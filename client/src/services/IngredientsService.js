@@ -12,7 +12,6 @@ class IngredientService {
         logger.log('deleting ingredient', response.data)
         const ingredientToDelete = AppState.ingredients.findIndex(ingredient => ingredient.id == ingredientId)
         AppState.ingredients.splice(ingredientToDelete, 1)
-
     }
 
     async createIngredient(ingredientData) {
@@ -22,11 +21,11 @@ class IngredientService {
         AppState.ingredients.push(ingredient)
     }
     async getIngredientsByRecipeId(recipeId) {
+        AppState.ingredients = []
         const response = await api.get(`api/recipes/${recipeId}/ingredients`)
         logger.log("got ingredients", response.data)
         const ingredients = response.data.map(pojo => new Ingredient(pojo))
         AppState.ingredients = ingredients
-
     }
 
 }
