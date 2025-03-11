@@ -15,8 +15,6 @@ const account = computed(() => AppState.account)
 
 const editMode = ref(false)
 
-
-
 const editableIngredientData = ref({
     quantity: '',
     name: '',

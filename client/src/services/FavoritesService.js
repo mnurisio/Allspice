@@ -5,6 +5,9 @@ import { AppState } from "@/AppState.js"
 
 
 class FavoritesService {
+    // getMyFavoriteRecipes(myFavoriteRecipes) {
+    
+    // }
     async deleteFavorite(favoriteId) {
         const response = await api.delete(`api/favorites/${favoriteId}`)
         logger.log(`deleting favorite ID of ${favoriteId}`, response.data)

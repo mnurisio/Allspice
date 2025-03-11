@@ -6,5 +6,6 @@ export class Favorite{
         this.recipeId = data.recipeId
         this.accountId = data.accountId
         this.favoriteId = data.favoriteId
+        this.creator = data.creator
     }
 }

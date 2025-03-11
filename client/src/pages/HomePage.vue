@@ -15,13 +15,13 @@ const recipes = computed(() => AppState.recipe)
 const account = computed(() => AppState.account)
 
 
+
+
 onMounted(() => {
   getAllRecipes()
 })
 
 watch(account, getAccountFavorites)
-
-
 
 async function getAllRecipes() {
   try {
@@ -41,15 +41,19 @@ async function getAccountFavorites(){
   }
 }
 
-async function getMyRecipes(){
+function getMyRecipes(){
   try {
     const accountId = account.value.id
-    await recipeService.getMyRecipes(accountId)
+    recipeService.getMyRecipes(accountId)
   }
   catch (error){
     Pop.error(error);
   }
 }
+
+// function getMyFavoriteRecipes(){
+  
+// }
 
 </script>
 
