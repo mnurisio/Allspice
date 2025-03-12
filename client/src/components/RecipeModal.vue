@@ -160,11 +160,11 @@ async function deleteIngredient(ingredientId) {
                         <div class="mb-2">
                             <h5 class="ingredient-title sahitya-bold m-0">Instructions</h5>
                         </div>
-                        <div class="ingredient-list">
+                        <div class="instruction-list">
                             <form v-if="editMode == true" @submit.prevent="updateInstructions()">
                                 <textarea v-model="editableRecipeData.instructions" type="textarea"
                                     class="form-control mb-2" id="instructions" placeholder="Instructions..." required
-                                    rows="5" minlength="5" maxlength="1000">
+                                    minlength="5" maxlength="1000">
                                 </textarea>
                                 <div class="text-start mb-2">
                                     <button role="button" type="submit"
@@ -233,6 +233,10 @@ async function deleteIngredient(ingredientId) {
 
 .ingredient-list::-webkit-scrollbar-thumb:hover {
     background: #176d73;
+}
+
+.instruction-list{
+    height:8rem
 }
 
 .form-submit {

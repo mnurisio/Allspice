@@ -53,6 +53,7 @@ class RecipeService {
         logger.log(`updating instructions`, response.data)
         const recipe = new Recipe(response.data)
         AppState.activeRecipe = recipe
+        AppState.recipe.splice(AppState.recipe.findIndex(r => r.id == recipeId), 1, recipe)
     }
 
 }
