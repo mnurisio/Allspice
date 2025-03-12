@@ -17,7 +17,7 @@ public class AccountsRepository
 
   internal Account GetById(string id)
   {
-    string sql = "SELECT * FROM accounts WHERE id = @id";
+    string sql = "SELECT * FROM profile_view WHERE id = @id";
     return _db.QueryFirstOrDefault<Account>(sql, new { id });
   }
 
@@ -35,7 +35,7 @@ public class AccountsRepository
   internal Account Edit(Account update)
   {
     string sql = @"
-            UPDATE accounts
+            UPDATE profile_view
             SET 
               name = @Name,
               picture = @Picture

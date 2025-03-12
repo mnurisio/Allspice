@@ -21,9 +21,9 @@ public class RecipeRepository
 
         SELECT
         recipes.*,
-        accounts.*
+        profile_view.*
         FROM recipes
-        JOIN accounts ON recipes.creator_id = accounts.id
+        JOIN profile_view ON recipes.creator_id = profile_view.id
         WHERE recipes.id = LAST_INSERT_ID();
         ";
 
@@ -41,9 +41,9 @@ public class RecipeRepository
         string sql = @"
         SELECT 
         recipes.*,
-        accounts.*
+        profile_view.*
         FROM recipes
-        JOIN accounts ON recipes.creator_id = accounts.id
+        JOIN profile_view ON recipes.creator_id = profile_view.id
         ;";
 
         List<Recipe> recipe = _db.Query(sql, (Recipe recipe, Profile account) =>
@@ -59,9 +59,9 @@ public class RecipeRepository
         string sql = @"
         SELECT
         recipes.*,
-        accounts.*
+        profile_view.*
         FROM recipes
-        JOIN accounts ON recipes.creator_id = accounts.id
+        JOIN profile_view ON recipes.creator_id = profile_view.id
         WHERE recipes.id = @recipeId
         ;";
 

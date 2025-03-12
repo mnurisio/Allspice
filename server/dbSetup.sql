@@ -70,10 +70,10 @@ INSERT INTO
 
         SELECT
         favorites.*,
-        accounts.*,
+        profile_view.*,
         recipes.*
         FROM favorites
-        JOIN accounts ON favorites.account_id = accounts.id
+        JOIN profile_view ON favorites.account_id = profile_view.id
         JOIN recipes ON favorites.recipe_id = recipes.id
         WHERE favorites.id = LAST_INSERT_ID()
 

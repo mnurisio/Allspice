@@ -23,10 +23,10 @@ public class FavoritesRepository
 
         SELECT
         favorites.*,
-        accounts.*,
+        profile_view.*,
         recipes.*
         FROM favorites
-        JOIN accounts ON favorites.account_id = accounts.id
+        JOIN profile_view ON favorites.account_id = profile_view.id
         JOIN recipes ON favorites.recipe_id = recipes.id
         WHERE favorites.id = LAST_INSERT_ID();";
 
@@ -47,10 +47,10 @@ public class FavoritesRepository
         SELECT
         favorites.*,
         recipes.*,
-        accounts.*
+        profile_view.*
         FROM favorites
         JOIN recipes ON favorites.recipe_id = recipes.id
-        JOIN accounts ON accounts.id = recipes.creator_id
+        JOIN profile_view ON profile_view.id = recipes.creator_id
         WHERE favorites.account_id = @userId
         ;";
 
