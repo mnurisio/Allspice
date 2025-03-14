@@ -25,6 +25,8 @@ CREATE TABLE recipes (
     FOREIGN KEY (creator_id) REFERENCES accounts (id) ON DELETE CASCADE
 )
 
+DROP TABLE recipes
+
 CREATE TABLE ingredients (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
@@ -35,6 +37,8 @@ CREATE TABLE ingredients (
     FOREIGN KEY (recipe_id) REFERENCES recipes (id) ON DELETE CASCADE
 )
 
+DROP TABLE ingredients
+
 CREATE TABLE favorites (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
@@ -44,6 +48,8 @@ CREATE TABLE favorites (
     FOREIGN KEY (recipe_id) REFERENCES recipes (id) ON DELETE CASCADE,
     FOREIGN KEY (account_id) REFERENCES accounts (id) ON DELETE CASCADE
 )
+
+DROP TABLE favorites
 
 INSERT INTO
 favorites(recipe_id, account_id)

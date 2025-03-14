@@ -85,7 +85,7 @@ async function deleteIngredient(ingredientId) {
             <div v-if="recipe" class="modal-content container">
                 <div class="row">
                     <div class="col-md-6 px-0">
-                        <img class="img-fluid w-100 h-100" :src="recipe.img" :alt="recipe.title">
+                        <img class="modal-image img-fluid w-100 h-100" :src="recipe.img" :alt="recipe.title">
                     </div>
                     <div class="col-md-6 pe-md-0">
                         <div class="text-end" @click="editMode = false" role="button" data-bs-dismiss="modal">
@@ -187,7 +187,7 @@ async function deleteIngredient(ingredientId) {
     text-overflow: ellipsis;
 }
 
-.img {
+.modal-image {
     object-fit: cover;
     object-position: center;
 }
@@ -210,7 +210,7 @@ async function deleteIngredient(ingredientId) {
 }
 
 .ingredient-list {
-    height: 11rem;
+    height: 5rem;
     overflow-y: scroll;
 }
 

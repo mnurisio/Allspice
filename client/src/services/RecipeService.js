@@ -12,6 +12,14 @@ class RecipeService {
         logger.log('getting my recipes')
         AppState.recipe = recipes
     }
+
+    getMyFavoriteRecipes(favoriteRecipes) {
+        const recipes = AppState.recipe.filter(r => r.id == favoriteRecipes.recipeId)
+        logger.log('getting favorite recipes')
+        AppState.recipe = recipes
+    }
+
+
     async deleteRecipe() {
         const recipe = AppState.activeRecipe
         const response = await api.delete(`api/recipes/${recipe.id}`)
@@ -42,10 +50,6 @@ class RecipeService {
         logger.log('got all recipes', response.data)
         const recipes = response.data.map(recipePOJO => new Recipe(recipePOJO))
         AppState.recipe = recipes
-    }
-
-    getMyFavoriteRecipes(myFavoriteRecipes) {
-        AppState.recipe = myFavoriteRecipes
     }
 
     async updateInstructions(recipeData, recipeId) {
